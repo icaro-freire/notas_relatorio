@@ -1,3 +1,0 @@
-"0","notas_matricula %>% "
-"0","  datatable(caption = 'Resultado Final',"
-"0","            options = list(scrollX = TRUE))"

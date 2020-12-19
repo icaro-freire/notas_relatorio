@@ -9,6 +9,8 @@ bookdown::gitbook:
     download: ["pdf", "epub"]
     sharing:
       github: yes
+      facebook: no
+      twitter: no
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

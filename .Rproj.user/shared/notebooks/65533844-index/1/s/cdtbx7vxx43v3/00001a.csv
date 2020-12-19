@@ -1,4 +1,0 @@
-"0","#notas_matricula %>% "
-"0","#  kable(booktabs = TRUE, caption = ""Resultado Final"") %>%"
-"0","#  kable_styling() %>%"
-"0","#  scroll_box(width = ""100%"")"

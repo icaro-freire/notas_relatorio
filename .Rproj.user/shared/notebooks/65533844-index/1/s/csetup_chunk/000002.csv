@@ -1,3 +1,113 @@
-"0","library(DT)
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","library(tidyverse)"
+"2","Registered S3 methods overwritten by 'dbplyr':
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
 "
+"2","[37m-- [1mAttaching packages[22m ---------------------------------- tidyverse 1.3.0 --[39m
+"
+"2","[37m[32mv[37m [34mggplot2[37m 3.3.2     [32mv[37m [34mpurrr  [37m 0.3.4
+[32mv[37m [34mtibble [37m 3.0.4     [32mv[37m [34mdplyr  [37m 1.0.2
+[32mv[37m [34mtidyr  [37m 1.1.2     [32mv[37m [34mstringr[37m 1.4.0
+[32mv[37m [34mreadr  [37m 1.4.0     [32mv[37m [34mforcats[37m 0.5.0[39m
+"
+"2","package ‘tibble’ was built under R version 4.0.3"
+"2","package ‘readr’ was built under R version 4.0.3"
+"2","[37m-- [1mConflicts[22m ------------------------------------- tidyverse_conflicts() --
+[31mx[37m [34mdplyr[37m::[32mfilter()[37m masks [34mstats[37m::filter()
+[31mx[37m [34mdplyr[37m::[32mlag()[37m    masks [34mstats[37m::lag()[39m
+"
+"0","library(viridis)"
+"2","Carregando pacotes exigidos: viridisLite
+"
+"0","library(scales)"
+"2","
+Attaching package: ‘scales’
+
+"
+"2","The following object is masked from ‘package:viridis’:
+
+    viridis_pal
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    discard
+
+"
+"2","The following object is masked from ‘package:readr’:
+
+    col_factor
+
+"
+"0","library(ggridges)"
+"0","library(plotly)"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","Registered S3 method overwritten by 'htmlwidgets':
+  method           from         
+  print.htmlwidget tools:rstudio
+"
+"2","
+Attaching package: ‘plotly’
+
+"
+"2","The following object is masked from ‘package:ggplot2’:
+
+    last_plot
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    filter
+
+"
+"2","The following object is masked from ‘package:graphics’:
+
+    layout
+
+"
+"0","library(kableExtra)"
+"2","package ‘kableExtra’ was built under R version 4.0.3"
+"2","
+Attaching package: ‘kableExtra’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    group_rows
+
+"
+"0","library(DT)"
 "2","package ‘DT’ was built under R version 4.0.3"
+"0","notas <- tribble("
+"0","  ~matricula, ~nome, ~""01_ativ_aval"", ~""02_ativ_aval"", ~""03_ativ_aval"", ~""01_prova"",~""licoes"", ~""02_prova"", ~""ponto_latex"", ~""ponto_integral"","
+"0","  2018111086, ""allan"",        95.0, 80, 96, 100,  93.91, 64.00, 1.00, 0.00,"
+"0","  201610405,  ""bruno_passos"", 48.3, 07, 80, 16,   66.96, 49.00, 1.00, 0.70,"
+"0","  201610402,  ""carine"",       95.0, 80, 96, 100,  91.3,  55.00, 1.00, 0.00,"
+"0","  20101415,   ""jirleyde"",     38.0, 20, 57, 16.2, 52.6,  19.00, 1.00, 0.00,"
+"0","  201111593,  ""luana"",        38.0, 20, 57, 8,    60.65, 19.00, 1.00, 0.00,"
+"0","  201411224,  ""miqueias"",     19.0, 00, 00, 12,   84.79, 00.00, 0.00, 0.00,"
+"0","  201211305,  ""saionara"",     48.3, 07, 80, 10,   75.21, 47.50, 1.00, 0.70,"
+"0","  20101448,   ""viviane"",      38.0, 20, 57, 16.2, 70.29, 19.00, 1.00, 0.00,"
+"0","  201611170,  ""waschiton"",    19.0, 00, 00, 42.2, 96.09, 00.00, 0.00, 0.00,"
+"0","  2017204556, ""yago"",         95.0, 80, 96, 100,  98.26, 63.00, 1.00, 0.00"
+"0",") "
+"0",""
+"0","notas <- notas %>% "
+"0","  mutate('media' = "
+"0","    round("
+"0","         (3 * (notas$'01_ativ_aval' + notas$'02_ativ_aval' + notas$'03_ativ_aval')/3 + "
+"0","          3 * (notas$licoes) +"
+"0","          4 * (notas$'01_prova' + notas$'02_prova')/2"
+"0","         )/100 +"
+"0","         (notas$ponto_latex) +"
+"0","         (notas$ponto_integral),"
+"0","    1)"
+"0","  ) "
+"0",""
+"0","notas_matricula <- notas %>% "
+"0","  select(-nome)"
