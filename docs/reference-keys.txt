@@ -1,6 +1,4 @@
-prerequisites
 explicando-o-cálculo-das-notas
 tabela-das-notas
 gráfico-boxplot-da-distribuição-das-médias
 palavras-finais
-tab:unnamed-chunk-1
