@@ -3,10 +3,12 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li class="toc-logo"><a href="./"><img src="img/simplex_logo.jpg" width=275></a></li>
+        <li class="toc-logo"><a href="./"><img src="img/simplex_logo.png" width=280></a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Produzido com bookdown</a></li>
     download: ["pdf", "epub"]
+    sharing:
+      github: yes
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

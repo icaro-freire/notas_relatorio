@@ -58,7 +58,7 @@ Pessoal, fizemos *Lições* ($N_{_\mathrm{L}}$), *Atividades Avaliativas* (cuja 
 
 A média final da disciplina ($M_{_\mathcal{D}}$) é calculada com a seguinte fórmula:
 \[
-  M_{_\mathcal{D}} = \frac{3 \cdot N_{_\mathrm{L}} + 3 \cdot  N_{_\mathrm{AV}}  + N_{_\mathrm{P}} }{100} + 
+  M_{_\mathcal{D}} = \frac{3 \cdot N_{_\mathrm{L}} + 3 \cdot  N_{_\mathrm{AV}}  + 4\cdot N_{_\mathrm{P}} }{100} + 
   P_{_\mathrm{TeX}} + P_{_\mathrm{Int}}
 \]
 

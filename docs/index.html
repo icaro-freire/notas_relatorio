@@ -81,7 +81,7 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li class="toc-logo"><a href="./"><img src="img/simplex_logo.jpg" width=275></a></li>
+<li class="toc-logo"><a href="./"><img src="img/simplex_logo.png" width=280></a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Explicando o Cálculo das Notas</a></li>
@@ -118,7 +118,7 @@
 <p>Pessoal, fizemos <em>Lições</em> (<span class="math inline">\(N_{_\mathrm{L}}\)</span>), <em>Atividades Avaliativas</em> (cuja média denotaremos por <span class="math inline">\(N_{_\mathrm{AV}}\)</span>), <em>Provas</em> (cuja média denotaremos por <span class="math inline">\(N_{_\mathrm{P}}\)</span>) e <em>Pontos Extras</em> (o do <span class="math inline">\(\LaTeX\)</span> - <span class="math inline">\(P_{_\mathrm{TeX}}\)</span>; e da questão de integral - <span class="math inline">\(P_{_\mathrm{Int}}\)</span>).</p>
 <p>A média final da disciplina (<span class="math inline">\(M_{_\mathcal{D}}\)</span>) é calculada com a seguinte fórmula:
 <span class="math display">\[
-  M_{_\mathcal{D}} = \frac{3 \cdot N_{_\mathrm{L}} + 3 \cdot  N_{_\mathrm{AV}}  + N_{_\mathrm{P}} }{100} + 
+  M_{_\mathcal{D}} = \frac{3 \cdot N_{_\mathrm{L}} + 3 \cdot  N_{_\mathrm{AV}}  + 4\cdot N_{_\mathrm{P}} }{100} + 
   P_{_\mathrm{TeX}} + P_{_\mathrm{Int}}
 \]</span></p>
 <p>Obviamente, a nota máxima alcançada não pode ultrapassar os 10 pontos.</p>
@@ -145,7 +145,7 @@
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
+"github": true,
 "facebook": true,
 "twitter": true,
 "linkedin": false,
