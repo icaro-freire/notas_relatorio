@@ -1,0 +1,130 @@
+--- 
+title: "Resultado Final da Disciplina"
+author: "SIMPLEX (2020.3)"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Pequeno relatório sobre o resultado da disciplina Funções de uma Variável Complexas do semestre suplementar 2020.3"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(viridis)
+library(scales)
+library(ggridges)
+library(plotly)
+library(kableExtra)
+library(DT)
+
+
+
+notas <- tribble(
+  ~matricula, ~nome, ~"01_ativ_aval", ~"02_ativ_aval", ~"03_ativ_aval", ~"01_prova",~"licoes", ~"02_prova", ~"ponto_latex", ~"ponto_integral",
+  2018111086, "allan",        95.0, 80, 96, 100,  93.91, 64.00, 1.00, 0.00,
+  201610405,  "bruno_passos", 48.3, 07, 80, 16,   66.96, 49.00, 1.00, 0.70,
+  201610402,  "carine",       95.0, 80, 96, 100,  91.3,  55.00, 1.00, 0.00,
+  20101415,   "jirleyde",     38.0, 20, 57, 16.2, 52.6,  19.00, 1.00, 0.00,
+  201111593,  "luana",        38.0, 20, 57, 8,    51.96, 19.00, 1.00, 0.00,
+  201411224,  "miqueias",     19.0, 00, 00, 12,   84.79, 00.00, 0.00, 0.00,
+  201211305,  "saionara",     48.3, 07, 80, 10,   75.21, 47.50, 1.00, 0.70,
+  20101448,   "viviane",      38.0, 20, 57, 16.2, 70.29, 19.00, 1.00, 0.00,
+  201611170,  "waschiton",    19.0, 00, 00, 42.2, 96.09, 00.00, 0.00, 0.00,
+  2017204556, "yago",         95.0, 80, 96, 100,  98.26, 63.00, 1.00, 0.00
+) 
+
+notas <- notas %>% 
+  mutate('media' = 
+    round(
+         (3 * (notas$'01_ativ_aval' + notas$'02_ativ_aval' + notas$'03_ativ_aval')/3 + 
+          3 * (notas$licoes) +
+          4 * (notas$'01_prova' + notas$'02_prova')/2
+         )/100 +
+         (notas$ponto_latex) +
+         (notas$ponto_integral),
+    1)
+  ) 
+
+notas_matricula <- notas %>% 
+  select(-nome)
+```
+
+# Explicando o Cálculo das Notas
+
+Pessoal, fizemos *Lições* ($N_{_\mathrm{L}}$), *Atividades Avaliativas* (cuja média denotaremos por $N_{_\mathrm{AV}}$), *Provas* (cuja média denotaremos por $N_{_\mathrm{P}}$) e *Pontos Extras* (o do $\LaTeX$ - $P_{_\mathrm{TeX}}$; e da questão de integral - $P_{_\mathrm{Int}}$).
+
+A média final da disciplina ($M_{_\mathcal{D}}$) é calculada com a seguinte fórmula:
+\[
+  M_{_\mathcal{D}} = \frac{3 \cdot N_{_\mathrm{L}} + 3 \cdot  N_{_\mathrm{AV}}  + N_{_\mathrm{P}} }{100} + 
+  P_{_\mathrm{TeX}} + P_{_\mathrm{Int}}
+\]
+
+Obviamente, a nota máxima alcançada não pode ultrapassar os 10 pontos.
+
+# Tabela das Notas
+
+A tabela abaixo mostra o resumo até agora.\n
+Qualquer discrepância deve ser comunicada imediatamente, visto que tais notas serão postas no [SIGAA](https://sistemas.ufrb.edu.br/sigaa/verTelaLogin.do) ainda hoje (desde quinta eu havia mandado as notas para análise).
+
+<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+ Movimente a *barra de rolagem* horizontal até que você veja a *média da disciplina*. Além disso, você pode digitar sua matrícula para individualizar sua análise.
+
+```{r echo=FALSE}
+notas_matricula %>% 
+  datatable(caption = 'Resultado Final',
+            options = list(scrollX = TRUE))
+#notas_matricula %>% 
+#  kable(booktabs = TRUE, caption = "Resultado Final") %>%
+#  kable_styling() %>%
+#  scroll_box(width = "100%")
+```
+
+# Gráfico Boxplot da Distribuição das Médias
+
+Podemos visualizar a distribuição das médias por meio de um gráfico chamado *Bloxplot*.
+
+Boxplots fornecem um bom resumo de uma ou mais variáveis numéricas.
+
+- O segmento de reta horizontal que divide a "caixa" em duas partes, representa a **mediana** dos dados;
+- Os segmentos horizontais (ainda da "caixa"), final e inicial, são, respectivamente, o 3º e o 1º **quartis**, denotados por $q_3$ e $q_1$, respectivamente. 
+- A diferença entre o 3º e o 1º quartil é denominada **intervalo interquartil**
+ e é denotado por $IQR$.
+- Os segmentos verticais exteriores à caixa são delimitados por $q_1 - 1.5\cdot IQR$, inferiormente; e por $q_3 + 1.5\cdot IQR$, superiormente.
+- Os pontos fora de tais segmentos verticais são denominados **outliers** (que não ocorreram nesse semestre).
+
+Para construção dos gráficos (que é interativo), excluí os nomes dos discentes que não permaneceram na disciplina até o encerramento da mesma.
+
+```{r echo=FALSE}
+notas_boxplot <- notas_matricula %>%
+  slice(-c(6,9)) %>% 
+  select(media)
+
+p <- notas_boxplot %>%  
+  ggplot(aes('', media)) +
+  geom_boxplot(width = 0.5, color = "blue") + 
+  geom_jitter(color = "red") +
+  geom_hline(yintercept = 6.0, 
+             lty = 2, 
+             color = "orange") +
+  geom_text(aes(x = 0.58, y = 6.2, label = "Média de Aprovação"),
+            colour = "red") +
+  labs(x = "Semestre 2020.3", y = "Média") +
+  ggtitle("Boxplot com a distribuição das médias") +
+  theme_get() 
+
+ggplotly(p)
+
+```
+<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+No gráfico acima, foi destacada a *Média de Aprovação* da disciplina (que são de 6 pontos).
+
+# Palavras finais
+
+Sei o quanto alguns de vocês se esforçaram durante esse semestre tão atípico.
+
+Nem tudo sai como esperamos, mas desejo que as coisas sejam melhores no próximo semestre.
+
+Boas festas!
